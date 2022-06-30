@@ -18,10 +18,18 @@ CENTER_NAME = import_from_settings('CENTER_NAME')
 CENTER_BASE_URL = import_from_settings('CENTER_BASE_URL')
 CENTER_PROJECT_RENEWAL_HELP_URL = import_from_settings(
     'CENTER_PROJECT_RENEWAL_HELP_URL')
-EMAIL_SENDER = import_from_settings('EMAIL_SENDER')
-EMAIL_OPT_OUT_INSTRUCTION_URL = import_from_settings(
-    'EMAIL_OPT_OUT_INSTRUCTION_URL')
-EMAIL_SIGNATURE = import_from_settings('EMAIL_SIGNATURE')
+
+EMAIL_ENABLED = import_from_settings('EMAIL_SENDER', False)
+if not EMAIL_ENABLED: #Those settings are not read if EMAIL_ENABLED=False
+    EMAIL_SENDER = 'email_disabled'
+    EMAIL_OPT_OUT_INSTRUCTION_URL = 'email_disabled'
+    EMAIL_SIGNATURE = 'email_disabled'
+else:
+    EMAIL_SENDER = import_from_settings('EMAIL_SENDER')
+    EMAIL_OPT_OUT_INSTRUCTION_URL = import_from_settings(
+        'EMAIL_OPT_OUT_INSTRUCTION_URL')
+    EMAIL_SIGNATURE = import_from_settings('EMAIL_SIGNATURE')
+
 EMAIL_ALLOCATION_EXPIRING_NOTIFICATION_DAYS = import_from_settings(
     'EMAIL_ALLOCATION_EXPIRING_NOTIFICATION_DAYS', [7, ])
 
